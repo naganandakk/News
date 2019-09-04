@@ -1,0 +1,7 @@
+export const SIGN_IN = "SIGN_IN"
+export const SIGN_OUT = "SIGN_OUT"
+export const FETCH_ARTICLES = "FETCH_ARTICLES"
+export const FETCH_SOURCES = "FETCH_SOURCES"
+export const UPDATE_FILTERS = "ADD_FILTERS"
+export const REMOVE_FILTERS = "REMOVE_FILTERS"
+export const UPDATE_UI_STATE = "UPDATE_UI_STATE"
