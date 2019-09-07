@@ -3,8 +3,7 @@ import {
 } from '../actions/types';
 
 const defaultState = {
-    sidebarMobile: false,
-    sidebarDesktop: true,
+    sidebar: true,
     pageLoader: false
 }
 

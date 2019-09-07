@@ -1,24 +1,21 @@
 import axios from 'axios';
 
 const apiKeys = [
-    "f251266458e947ba94e465c731e10a2a",
-    "afbacd1a0f8a435e8971084223998783"
+    "c49a84ffd38cc57003d2a4c2c8a799f5"
 ]
 
 const client = axios.create({
-    baseURL: "https://newsapi.org/v2"
+    baseURL: "https://api.openweathermap.org/data/2.5/forecast"
 })
 
 client.interceptors.request.use((request) => {
     const apiKeyIndex = Math.floor((Math.random() * apiKeys.length));
     const apiKey = apiKeys[apiKeyIndex];
 
-    // Auth token
-    request.headers.Authorization = `Bearer ${apiKey}`;
-
     // Default query parameters
     const defaultQueryParams = {
-        country: "in", pageSize: 100, language: "en"
+        appid: apiKey,
+        id: "1277333"
     };
 
     request.params = { ...defaultQueryParams, ...request.params };
