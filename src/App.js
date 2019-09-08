@@ -15,6 +15,7 @@ export default function() {
         <Switch>
           <Route exact path="/" component={TopStories} />
           <Route exact path="/topics/:topicID" component={Topics} />
+          <Route exact path="/topics/:topicID/sections/:sectionID" component={Topics} />
         </Switch>
       </Layout>
     </HashRouter>

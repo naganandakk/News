@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
@@ -7,9 +9,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import FeaturedPlayListIcon from '@material-ui/icons/FeaturedPlayList';
-import FlagIcon from '@material-ui/icons/Flag';
-import PublicIcon from '@material-ui/icons/Public';
-import RoomIcon from '@material-ui/icons/Room';
 import BusinessIcon from '@material-ui/icons/Business';
 import LocalMovieIcon from '@material-ui/icons/LocalMovies';
 import MemoryIcon from '@material-ui/icons/Memory';
@@ -21,7 +20,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     drawer: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             width: drawerWidth,
             flexShrink: 0,
         },
@@ -65,22 +64,40 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function (props) {
+const Sidebar = (props) => {
     const classes = useStyles();
+    const pathname = props.location.pathname;
     const menuList = [
         [
-            { key: 'top-stories', title: 'Top stories', icon: <FeaturedPlayListIcon/>, link: '', selected: true }
+            {
+                key: 'top-stories', title: 'Top stories', icon: <FeaturedPlayListIcon/>,
+                link: '/', selected: (pathname === '/' || pathname.includes('top-stories')) ? true : false }
         ],
         [
-            { key: 'india', title: 'India', icon: <FlagIcon/>, link: '', selected: false },
-            { key: 'world', title: 'World', icon: <PublicIcon/>, link: '', selected: false },
-            { key: 'local-stories', title: 'Local stories', icon: <RoomIcon/>, link: '', selected: false },
-            { key: 'business', title: 'Business', icon: <BusinessIcon/>, link: '', selected: false },
-            { key: 'technology', title: 'Technology', icon: <MemoryIcon/>, link: '', selected: false },
-            { key: 'entertainment', title: 'Entertainment', icon: <LocalMovieIcon/>, link: '', selected: false },
-            { key: 'sports', title: 'Sports', icon: <DirectionsBikeIcon/>, link: '', selected: false },
-            { key: 'science', title: 'Science', icon: <ScienceIcon/>, link: '', selected: false },
-            { key: 'health', title: 'Health', icon: <FitnessCenterIcon/>, link: '', selected: false }
+            {
+                key: 'business', title: 'Business', icon: <BusinessIcon/>,
+                link: '/topics/business', selected: pathname.includes('topics/business') ? true : false
+            },
+            {
+                key: 'technology', title: 'Technology', icon: <MemoryIcon/>,
+                link: '/topics/technology', selected: pathname.includes('topics/technology') ? true : false
+            },
+            {
+                key: 'entertainment', title: 'Entertainment', icon: <LocalMovieIcon/>,
+                link: '/topics/entertainment', selected: pathname.includes('topics/entertainment') ? true : false
+            },
+            {
+                key: 'sports', title: 'Sports', icon: <DirectionsBikeIcon/>,
+                link: '/topics/sports', selected: pathname.includes('topics/sports') ? true : false
+            },
+            {
+                key: 'science', title: 'Science', icon: <ScienceIcon/>,
+                link: '/topics/science', selected: pathname.includes('topics/science') ? true : false
+            },
+            {
+                key: 'health', title: 'Health', icon: <FitnessCenterIcon/>,
+                link: '/topics/health', selected: pathname.includes('topics/health') ? true : false
+            }
         ]
     ];
 
@@ -89,20 +106,24 @@ export default function (props) {
 
         return menuList.map((menus, menusIdx) => {
             return (
-                <React.Fragment>
+                <React.Fragment key={`menu-list-${menusIdx}`}>
                     <List>
                         {
                             menus.map((menu) => {
                                 return (
-                                    <ListItem button key={menu.key} className={menu.selected ? classes.listItemSelected : classes.listItem}>
-                                        <ListItemIcon className={menu.selected ? classes.listItemIconSelected : ''} >{menu.icon}</ListItemIcon>
-                                        <span>{menu.title}</span>
-                                    </ListItem>
+                                    <Link key={menu.title} to={menu.link} onClick={() => {
+                                        if (props.openMobile) { props.onMobileMenuToggle(); }
+                                    }}>
+                                        <ListItem button key={menu.key} className={menu.selected ? classes.listItemSelected : classes.listItem}>
+                                            <ListItemIcon className={menu.selected ? classes.listItemIconSelected : ''} >{menu.icon}</ListItemIcon>
+                                            <span>{menu.title}</span>
+                                        </ListItem>
+                                    </Link>
                                 )
                             })
                         }
                     </List>
-                    { menuListLength - 1 != menusIdx ? <Divider /> : null }
+                    { menuListLength - 1 !== menusIdx ? <Divider /> : null }
                 </React.Fragment>
             )
         });
@@ -147,12 +168,14 @@ export default function (props) {
 
     return (
         <nav className={classes.drawer} aria-label="top-stories categories">
-            <Hidden smUp implementation="css">
+            <Hidden mdUp implementation="css">
                 {renderMobileDrawer()}
             </Hidden>
-            <Hidden xsDown implementation="css">
+            <Hidden smDown implementation="css">
                 {renderDesktopDrawer()}
             </Hidden>
         </nav>
     )
 }
+
+export default withRouter(Sidebar);

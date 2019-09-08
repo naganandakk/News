@@ -18,7 +18,7 @@ client.interceptors.request.use((request) => {
 
     // Default query parameters
     const defaultQueryParams = {
-        country: "in", pageSize: 100, language: "en"
+        country: "in", pageSize: 100
     };
 
     request.params = { ...defaultQueryParams, ...request.params };

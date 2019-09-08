@@ -10,7 +10,8 @@ const useStyles = makeStyles(theme => ({
     title: {
         padding: theme.spacing(0),
         margin: theme.spacing(0),
-        marginBottom: theme.spacing(1)
+        marginBottom: theme.spacing(1),
+        marginTop: theme.spacing(3)
     }
 }));
 
@@ -25,9 +26,11 @@ export default function(props) {
         );
     });
 
+    const title = props.title ? <h2 className={classes.title}>{props.title}</h2> : null;
+
     return(
         <React.Fragment>
-            <h2 className={classes.title}>{props.title}</h2>
+            {title}
             {articleList}
         </React.Fragment>
     )

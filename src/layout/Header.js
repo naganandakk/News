@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
@@ -26,12 +25,12 @@ export default function (props) {
     return (
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
-                <Hidden smUp implementation="css">
+                <Hidden mdUp implementation="css">
                     <IconButton onClick={props.onMobileMenuToggle} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
                 </Hidden>
-                <Hidden xsDown implementation="css">
+                <Hidden smDown implementation="css">
                     <IconButton onClick={props.onDesktopMenuToggle} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
@@ -39,7 +38,6 @@ export default function (props) {
                 <h3 className={classes.title}>
                     Daily News
                 </h3>
-                <Button color="inherit">Sign in</Button>
             </Toolbar>
         </AppBar>
     );

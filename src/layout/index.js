@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Header from './Header';
 import Sidebar from './Sidebar';
-import Weather from '../components/weather';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(4),
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -64,11 +63,8 @@ export default function (props) {
                 [classes.contentShift]: desktopSidebarOpen,
             })}>
                 <Grid container className={classes.gridContainer} spacing={2}>
-                    <Grid item xs={12} sm={8}>
+                    <Grid item xs={12} sm={12} md={8}>
                         {props.children}
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Weather />
                     </Grid>
                 </Grid>
             </Container>

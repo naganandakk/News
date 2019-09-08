@@ -3,8 +3,6 @@ import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 
 const useStyles = makeStyles(theme => ({
     gridContainer: {
@@ -17,19 +15,44 @@ const useStyles = makeStyles(theme => ({
         borderColor: "#D3D3D3"
     },
     mediaContainer: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(3),
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(1)
+        }
+    },
+    articleContainer: {
+        padding: theme.spacing(3),
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(1),
+            margin: theme.spacing(0)
+        }
     },
     media: {
-        maxHeight: 200,
-        borderRadius: theme.spacing(1)
+        width: '100%',
+        height: '100%',
+        borderRadius: theme.spacing(1),
+        [theme.breakpoints.down('xs')]: {
+            maxHeight: 80
+        }
     },
     title: {
         padding: theme.spacing(0),
-        marginBottom: theme.spacing(0.5)
+        marginBottom: theme.spacing(0.5),
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.8rem'
+        }
     },
     source: {
         color: 'grey',
-        fontSize: "0.9rem"
+        fontSize: "0.9rem",
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.7rem'
+        }
+    },
+    description: {
+        [theme.breakpoints.down('sm')]: {
+            display: 'none'
+        }
     }
 }));
 
@@ -40,22 +63,15 @@ export default function (props) {
     return (
         <Card className={classes.card}>
             <Grid container className={classes.gridContainer}>
-                <Grid item xs={10}>
-                    <CardContent>
-                        <h3 className={classes.title}>{article.title}</h3>
-                        <span className={classes.source}>
-                            {article.source.name} - {moment.utc(article.publishedAt).fromNow()}
-                        </span>
-                        <p>{article.description}</p>
-                    </CardContent>
+                <Grid item xs={8} className={classes.articleContainer}>
+                    <h3 className={classes.title}>{article.title}</h3>
+                    <span className={classes.source}>
+                        {article.source.name} - {moment.utc(article.publishedAt).fromNow()}
+                    </span>
+                    <p className={classes.description}>{article.description}</p>
                 </Grid>
-                <Grid item xs={2} className={classes.mediaContainer}>
-                    <CardMedia
-                        className={classes.media}
-                        component="img"
-                        image={article.urlToImage}
-                        title={article.title}
-                    />
+                <Grid item xs={4} className={classes.mediaContainer}>
+                    <img className={classes.media} src={article.urlToImage} alt="" />
                 </Grid>
             </Grid>
         </Card>
