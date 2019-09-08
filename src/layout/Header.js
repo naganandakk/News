@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 0.2,
         fontWeight: 600,
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             display: 'none'
         },
     },
