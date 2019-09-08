@@ -63,7 +63,7 @@ export default function (props) {
                 [classes.contentShift]: desktopSidebarOpen,
             })}>
                 <Grid container className={classes.gridContainer} spacing={2}>
-                    <Grid item xs={12} sm={12} md={10} lg={8}>
+                    <Grid item xs={12} sm={12} md={10}>
                         {props.children}
                     </Grid>
                 </Grid>

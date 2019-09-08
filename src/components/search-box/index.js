@@ -87,6 +87,7 @@ const SearchBox = (props) => {
     const handleKeyPress = (event) => {
         if (event.which === 13) {
             submitSearch();
+            event.target.blur();
         }
     }
 

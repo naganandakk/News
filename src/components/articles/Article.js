@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     description: {
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('xs')]: {
             display: 'none'
         }
     }
