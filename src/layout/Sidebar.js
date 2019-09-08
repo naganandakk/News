@@ -12,7 +12,7 @@ import FeaturedPlayListIcon from '@material-ui/icons/FeaturedPlayList';
 import BusinessIcon from '@material-ui/icons/Business';
 import LocalMovieIcon from '@material-ui/icons/LocalMovies';
 import MemoryIcon from '@material-ui/icons/Memory';
-import ScienceIcon from '@material-ui/icons/SignalCellularConnectedNoInternet0Bar';
+import SatelliteIcon from '@material-ui/icons/Satellite';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 
@@ -91,7 +91,7 @@ const Sidebar = (props) => {
                 link: '/topics/sports', selected: pathname.includes('topics/sports') ? true : false
             },
             {
-                key: 'science', title: 'Science', icon: <ScienceIcon/>,
+                key: 'science', title: 'Science', icon: <SatelliteIcon/>,
                 link: '/topics/science', selected: pathname.includes('topics/science') ? true : false
             },
             {
