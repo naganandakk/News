@@ -61,7 +61,11 @@ const useStyles = makeStyles(theme => ({
     },
     listItemIconSelected: {
         color: 'inherit'
-    }
+    },
+    title: {
+        paddingLeft: theme.spacing(2),
+        fontWeight: 600
+    },
 }));
 
 const Sidebar = (props) => {
@@ -142,7 +146,11 @@ const Sidebar = (props) => {
                     keepMounted: true, // Better open performance on mobile.
                 }}
             >
-                <div className={classes.toolbar} />
+                <div className={classes.toolbar}>
+                    <h3 className={classes.title}>
+                        Daily News
+                    </h3>
+                </div>
                 {renderMenuList()}
             </Drawer>
         );

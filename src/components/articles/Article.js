@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
         borderRadius: theme.spacing(1),
         [theme.breakpoints.down('xs')]: {
             maxHeight: 80
+        },
+        [theme.breakpoints.up('sm')]: {
+            maxHeight: 150
         }
     },
     title: {

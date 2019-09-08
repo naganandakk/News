@@ -18,10 +18,12 @@ client.interceptors.request.use((request) => {
 
     // Default query parameters
     const defaultQueryParams = {
-        country: "in", pageSize: 100
+        country: "in"
     };
 
-    request.params = { ...defaultQueryParams, ...request.params };
+    // Add pageSize in the end
+    // It will override pageSize provided in query string
+    request.params = { ...defaultQueryParams, ...request.params, pageSize: 100 };
     
     return request;
 });

@@ -7,6 +7,7 @@ import Layout from './layout';
 
 import TopStories from './pages/top-stories';
 import Topics from './pages/topics';
+import Search from './pages/search';
 
 export default function() {
   return (
@@ -16,6 +17,7 @@ export default function() {
           <Route exact path="/" component={TopStories} />
           <Route exact path="/topics/:topicID" component={Topics} />
           <Route exact path="/topics/:topicID/sections/:sectionID" component={Topics} />
+          <Route exact path="/search" component={Search} />
         </Switch>
       </Layout>
     </HashRouter>
