@@ -56,15 +56,24 @@ const useStyles = makeStyles(theme => ({
     },
     inputRoot: {
         color: 'inherit',
+        
+        [theme.breakpoints.up('md')]: {
+            marginLeft: theme.spacing(7),
+            marginRight: theme.spacing(11),
+        },
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: theme.spacing(3),
+            marginRight: theme.spacing(11)
+        },
     },
     inputInput: {
-        padding: theme.spacing(1, 4, 1, 7),
+        padding: theme.spacing(1, 4, 1, 1),
         transition: theme.transitions.create('width'),
         width: theme.spacing(75),
         height: theme.spacing(4),
         fontFamily: 'Google Sans',
         [theme.breakpoints.down('md')]: {
-            width: theme.spacing(35),
+            width: theme.spacing(30),
             padding: theme.spacing(1, 10, 1, 7)
         },
         [theme.breakpoints.down('xs')]: {
