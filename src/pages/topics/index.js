@@ -80,6 +80,8 @@ export default function Topics(props) {
     const onSectionChange = (sectionIndex) => {
         const section = tabs[topicID][sectionIndex].toLowerCase();
 
+        window.location.hash = `topics/${topicID}/sections/${section}`;
+
         loadSection(section);
     }
 

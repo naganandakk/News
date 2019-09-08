@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -50,6 +50,10 @@ export default function SectionsTab(props) {
         setValue(newValue);
         props.onSectionChange(newValue);
     }
+
+    useEffect(() => {
+        setValue(props.selectedTabIndex)
+    }, [props.selectedTabIndex]);
 
     return (
         <div className={classes.tabsContainer}>
