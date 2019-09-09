@@ -4,10 +4,11 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CloseIcon from '@material-ui/icons/Close';
 import Hidden from '@material-ui/core/Hidden';
 import queryString from 'query-string';
+
+import DropDown from './DropDown';
 
 const useStyles = makeStyles(theme => ({
     search: {
@@ -25,6 +26,12 @@ const useStyles = makeStyles(theme => ({
             width: 'auto',
         },
     },
+    searchMobile: {
+        position: 'relative',
+        // marginRight: theme.spacing(2),
+        // marginLeft: 0,
+        width: '100%'
+    },
     searchIcon: {
         width: theme.spacing(7),
         height: '100%',
@@ -34,20 +41,19 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         color: "#FFFFFF"
     },
-    arrowDropdownIcon: {
+    searchIconMobile: {
+        width: theme.spacing(7),
         height: '100%',
-        position: 'absolute',
-        // pointerEvents: 'none',
+        right: theme.spacing(2),
+        position: 'relative',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        right: theme.spacing(1),
         color: "#FFFFFF"
     },
     closeIcon: {
         height: '100%',
         position: 'absolute',
-        // pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -61,7 +67,7 @@ const useStyles = makeStyles(theme => ({
             marginLeft: theme.spacing(7),
             marginRight: theme.spacing(11),
         },
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.only('sm')]: {
             marginLeft: theme.spacing(3),
             marginRight: theme.spacing(11)
         },
@@ -71,26 +77,31 @@ const useStyles = makeStyles(theme => ({
         transition: theme.transitions.create('width'),
         width: theme.spacing(75),
         height: theme.spacing(4),
-        fontFamily: 'Google Sans',
         [theme.breakpoints.down('md')]: {
             width: theme.spacing(30),
             padding: theme.spacing(1, 10, 1, 7)
-        },
-        [theme.breakpoints.down('xs')]: {
-            width: '100%'
         }
     }
 }));
 
-const SearchBox = (props) => {
+const Search = (props) => {
+    const searchBoxRef = React.createRef();
     const classes = useStyles();
     const [value, setValue] = useState('');
     const [showClearSearchIcon, setShowClearSearchIcon] = useState(false);
     const queryParams = queryString.parse(props.location.search);
     const searchTerm = queryParams.q || '';
 
-    const submitSearch = () => {
-        window.location = `#/search?q=${value}`;
+    const submitSearch = (qString) => {
+        if (qString) {
+            window.location = `#/search?${qString}`;
+        } else if (value.trim()) {
+            window.location = `#/search?q=${value.trim()}`;
+        }
+    }
+
+    const clearSearch = () => {
+        setValue('');
     }
 
     const handleKeyPress = (event) => {
@@ -106,20 +117,18 @@ const SearchBox = (props) => {
 
     const renderDesktopSearchBox = () => {
         return (
-            <div className={classes.search}>
-                <IconButton className={classes.searchIcon}>
+            <div ref={searchBoxRef} className={classes.search}>
+                <IconButton onClick={submitSearch} className={classes.searchIcon}>
                     <SearchIcon />
                 </IconButton>
                 {
                     showClearSearchIcon
-                    ?   <IconButton className={classes.closeIcon}>
+                    ?   <IconButton onClick={clearSearch}className={classes.closeIcon}>
                             <CloseIcon />
                         </IconButton>
                     : null
                 }
-                <IconButton className={classes.arrowDropdownIcon}>
-                    <ArrowDropDownIcon />
-                </IconButton>
+                <DropDown className={classes.dropdown} queryString={props.location.search} onSearchSubmit={submitSearch} target={searchBoxRef} />
                 <InputBase
                     onChange={handleOnChange}
                     onKeyPress={handleKeyPress}
@@ -137,21 +146,21 @@ const SearchBox = (props) => {
 
     const renderMobileSearchBox = () => {
         return (
-            <div className={classes.search}>
-                <IconButton className={classes.searchIcon}>
+            <div className={classes.searchMobile}>
+                <IconButton className={classes.searchIconMobile}>
                     <SearchIcon />
                 </IconButton>
-                <InputBase
-                    onChange={handleOnChange}
-                    onKeyPress={handleKeyPress}
-                    value={value}
-                    placeholder="Search"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                />
+                {/* // <InputBase
+                //     onChange={handleOnChange}
+                //     onKeyPress={handleKeyPress}
+                //     value={value}
+                //     placeholder="Search"
+                //     classes={{
+                //         root: classes.inputRoot,
+                //         input: classes.inputInput,
+                //     }}
+                //     inputProps={{ 'aria-label': 'search' }}
+                // /> */}
             </div>
         )
     }
@@ -180,4 +189,4 @@ const SearchBox = (props) => {
     );
 }
 
-export default withRouter(SearchBox);
+export default withRouter(Search);

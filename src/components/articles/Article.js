@@ -12,7 +12,15 @@ const useStyles = makeStyles(theme => ({
         borderRadius: theme.spacing(1),
         borderStyle: "solid",
         borderWidth: "thin",
-        borderColor: "#D3D3D3"
+        borderColor: "#D3D3D3",
+        [theme.breakpoints.down('xs')]: {
+            borderRadius: theme.spacing(0),
+            border: theme.spacing(0),
+            borderBottomWidth: "thin",
+            borderBottomStyle: "solid",
+            borderBottomColor: "#D3D3D3",
+            boxShadow: 'none'
+        }
     },
     mediaContainer: {
         padding: theme.spacing(3),
@@ -32,7 +40,7 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         borderRadius: theme.spacing(1),
         [theme.breakpoints.down('xs')]: {
-            maxHeight: 80
+            maxHeight: 80,
         },
         [theme.breakpoints.up('sm')]: {
             maxHeight: 150
@@ -42,7 +50,8 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(0),
         marginBottom: theme.spacing(0.5),
         [theme.breakpoints.down('xs')]: {
-            fontSize: '0.8rem'
+            fontSize: '1rem',
+            fontWeight: 500,
         }
     },
     source: {

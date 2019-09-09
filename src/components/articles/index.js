@@ -11,7 +11,11 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(0),
         margin: theme.spacing(0),
         marginBottom: theme.spacing(1),
-        marginTop: theme.spacing(3)
+        marginTop: theme.spacing(3),
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '1.125rem',
+            fontWeight: 600
+        }
     }
 }));
 

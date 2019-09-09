@@ -21,6 +21,10 @@ const useStyles = makeStyles(theme => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: -240,
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(0),
+            paddingTop: theme.spacing(2)
+        }
     },
     contentShift: {
         transition: theme.transitions.create(['margin', 'width'], {

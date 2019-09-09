@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
 
-import SearchBox from '../components/search-box';
+import Search from '../components/search';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -18,9 +18,9 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 0.2,
         fontWeight: 600,
-        [theme.breakpoints.down('sm')]: {
-            display: 'none'
-        },
+        [theme.breakpoints.down('xs')]: {
+            flexGrow: 1
+        }
     },
 }));
 
@@ -43,7 +43,7 @@ export default function (props) {
                 <h3 className={classes.title}>
                     Daily News
                 </h3>
-                <SearchBox />
+                <Search />
             </Toolbar>
         </AppBar>
     );
