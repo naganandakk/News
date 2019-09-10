@@ -10,9 +10,19 @@ import queryString from 'query-string';
 
 const useStyles = makeStyles(theme => ({
     formControl: {
-        margin: theme.spacing(3),
         display: 'flex',
-        width: theme.spacing(50)
+    },
+    formControlLabel: {
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(2)
+    },
+    formContainer: {
+        padding: theme.spacing(1)
+    },
+    formActions: {
+    },
+    formBtn: {
+        textTransform: 'none'
     }
 }));
 
@@ -25,6 +35,18 @@ const Form = (props) => {
     const handleChange = name => event => {
         setFormFields({ ...formFields, [name]: event.target.value });
     };
+    
+    const formHasData = () => {
+        const keys = Object.keys(formFields);
+
+        for (var idx in keys) {
+            if (formFields[keys[idx]].trim( ) !== '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     const renderFormFields = () => {
         const formFieldList = [
@@ -61,30 +83,43 @@ const Form = (props) => {
         )
     }
 
-    const formHasData = () => {
-        Object.keys(formFields).forEach(key => {
-            if (formFields[key]) {
-                return true;
-            }
-        });
-
-        return true;
-    }
-
     const clearFormFields = () => {
         setFormFields(_.mapValues(formFields, () => ''));
     }
 
-    const handleSubmit = () => {
-        const queryParams = {};
+    const buildQuery = () => {
+        const queryParams = {
+            q: ''
+        };
 
-        if (formFields.website) {
-            queryParams.website = formFields.website;
+        // Has words
+        if (formFields.hasWords && formFields.hasWords.trim()) {
+            queryParams.q = `${queryParams.q}${formFields.hasWords.trim()}`;
         }
 
-        queryParams.q = formFields.hasWords.trim();
+        // Exact phrase (sorrounded by "")
+        if (formFields.exactPhrase && formFields.exactPhrase.trim()) {
+            queryParams.q = `${queryParams.q} "${formFields.exactPhrase.trim()}"`
+        }
 
-        props.onSubmit(queryString.stringify(queryParams));
+        // Exclude words prepend each word by ~
+        if (formFields.excludeWords && formFields.excludeWords.trim()) {
+            const wordsToExclude = formFields.excludeWords.trim().split();
+            const wordsNegated = wordsToExclude.map(word => "~" + word);
+
+            queryParams.q = `${queryParams.q} ${wordsNegated.join(' ')}`;
+        }
+
+        // Website
+        if (formFields.website && formFields.website.trim()) {
+            queryParams.domains = formFields.website.trim();
+        }
+
+        return queryString.stringify(queryParams);
+    }
+
+    const handleSubmit = () => {
+        props.onSubmit(buildQuery());
     }
 
     useEffect(() => {
@@ -113,6 +148,8 @@ const Form = (props) => {
         setFormFields(newFormFields);
     }, [props.queryString]);
 
+    const hasData = formHasData();
+
     return (
         <div className={classes.formContainer}>
             <div className={classes.form}>
@@ -122,14 +159,16 @@ const Form = (props) => {
 
             <div className={classes.formActions}>
                 <Button
-                    disabled={!formHasData()}
+                    className={classes.formBtn}
+                    disabled={!hasData}
                     onClick={clearFormFields}
                 >
                     Clear
                 </Button>
                 <Button
+                    className={classes.formBtn}
                     onClick={handleSubmit}
-                    disabled={!formHasData()}
+                    disabled={!hasData}
                     size="small"
                     variant="contained"
                     color="primary"

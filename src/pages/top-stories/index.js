@@ -22,12 +22,16 @@ export default function(props) {
         loadArticles();
     }, []);
 
+    const renderArticles = () => {
+        return <Articles title="Headlines" articles={articles}/>
+    }
+
     return(
         <React.Fragment>
             <Modal open={isLoading}>
                 <LinearProgress color="secondary" />
             </Modal>
-            <Articles title="Headlines" articles={articles}/>
+            {renderArticles()}
         </React.Fragment>
     )
 }

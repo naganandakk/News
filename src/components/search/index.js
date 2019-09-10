@@ -26,12 +26,6 @@ const useStyles = makeStyles(theme => ({
             width: 'auto',
         },
     },
-    searchMobile: {
-        position: 'relative',
-        // marginRight: theme.spacing(2),
-        // marginLeft: 0,
-        width: '100%'
-    },
     searchIcon: {
         width: theme.spacing(7),
         height: '100%',
@@ -146,22 +140,11 @@ const Search = (props) => {
 
     const renderMobileSearchBox = () => {
         return (
-            <div className={classes.searchMobile}>
+            <React.Fragment>
                 <IconButton className={classes.searchIconMobile}>
                     <SearchIcon />
                 </IconButton>
-                {/* // <InputBase
-                //     onChange={handleOnChange}
-                //     onKeyPress={handleKeyPress}
-                //     value={value}
-                //     placeholder="Search"
-                //     classes={{
-                //         root: classes.inputRoot,
-                //         input: classes.inputInput,
-                //     }}
-                //     inputProps={{ 'aria-label': 'search' }}
-                // /> */}
-            </div>
+            </React.Fragment>
         )
     }
 

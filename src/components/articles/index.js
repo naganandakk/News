@@ -17,26 +17,38 @@ const useStyles = makeStyles(theme => ({
             fontWeight: 600,
             paddingLeft: theme.spacing(1)
         }
+    },
+    noResults: {
+        textAlign: "center"
     }
 }));
 
 export default function(props) {
     const classes = useStyles();
 
-    const articleList = props.articles.map((article, idx) => {
-        return(
-            <div className={classes.article} key={idx} >
-                <Article className={classes.article} article={article} />
-            </div>
-        );
-    });
+    const renderArticleList = () => {
+        if (!props.articles.length) {
+            return(
+                <div className={classes.noResults}>
+                    <h4>No results found.</h4>
+                </div>
+            )
+        }
 
+        return props.articles.map((article, idx) => {
+            return(
+                <div className={classes.article} key={idx} >
+                    <Article className={classes.article} article={article} />
+                </div>
+            )
+        });
+    };
     const title = props.title ? <h2 className={classes.title}>{props.title}</h2> : null;
 
     return(
         <React.Fragment>
             {title}
-            {articleList}
+            {renderArticleList()}
         </React.Fragment>
     )
 }
