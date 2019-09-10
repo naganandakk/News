@@ -104,7 +104,9 @@ export default function Topics(props) {
             {
                 isSectionLoading
                 ?   <div className={classes.loader}><CircularProgress color="secondary" /></div>
-                :   <Articles articles={articles}/>
+                :   isTopicLoading
+                    ? null
+                    : <Articles articles={articles}/>
             }
         </React.Fragment>
     )

@@ -40,13 +40,21 @@ export default function Search(props) {
         loadArticles();
     }, [props.location.search]);
 
+    const renderArticles = () => {
+        if (isLoading) {
+            return null;
+        }
+
+        return <Articles articles={articles}/>;
+    }
+
     return(
         <React.Fragment>
             <Modal open={isLoading}>
                 <LinearProgress color="secondary" />
             </Modal>
             <div className={classes.spacing}></div>
-            <Articles articles={articles}/>
+            {renderArticles()}
         </React.Fragment>
     )
 }
