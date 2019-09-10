@@ -15,8 +15,13 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(1),
         marginTop: theme.spacing(3),
         [theme.breakpoints.down('xs')]: {
-            fontSize: '1.2rem'
+            fontSize: '1.125rem',
+            paddingLeft: theme.spacing(1),
+            fontWeight: 600
         }
+    },
+    loader: {
+        textAlign: "center"
     }
 }));
 
@@ -98,7 +103,7 @@ export default function Topics(props) {
             />
             {
                 isSectionLoading
-                ?   <CircularProgress color="secondary" />
+                ?   <div className={classes.loader}><CircularProgress color="secondary" /></div>
                 :   <Articles articles={articles}/>
             }
         </React.Fragment>

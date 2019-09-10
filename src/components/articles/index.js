@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(3),
         [theme.breakpoints.down('xs')]: {
             fontSize: '1.125rem',
-            fontWeight: 600
+            fontWeight: 600,
+            paddingLeft: theme.spacing(1)
         }
     }
 }));

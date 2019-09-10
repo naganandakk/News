@@ -8,7 +8,11 @@ const useStyles = makeStyles(theme => ({
         borderBottom: '1px solid',
         borderBottomWidth: 'thin',
         borderBottomColor: '#D3D3D3',
-        marginBottom: theme.spacing(3)
+        marginBottom: theme.spacing(3),
+        [theme.breakpoints.down('xs')]: {
+            marginLeft: theme.spacing(1),
+            marginRight: theme.spacing(1)
+        }
     },
     tabs: {
         padding: theme.spacing(0),
@@ -27,7 +31,8 @@ const useStyles = makeStyles(theme => ({
         width: 'fit-content',
         minWidth: theme.spacing(0),
         [theme.breakpoints.down('xs')]: {
-            fontSize: '0.8rem'
+            fontSize: '0.9rem',
+            padding: theme.spacing(1.2),
         }
     }
 }));

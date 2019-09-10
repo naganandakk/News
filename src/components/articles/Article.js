@@ -19,7 +19,9 @@ const useStyles = makeStyles(theme => ({
             borderBottomWidth: "thin",
             borderBottomStyle: "solid",
             borderBottomColor: "#D3D3D3",
-            boxShadow: 'none'
+            boxShadow: 'none',
+            marginLeft: theme.spacing(1),
+            marginRight: theme.spacing(1)
         }
     },
     mediaContainer: {
@@ -51,7 +53,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(0.5),
         [theme.breakpoints.down('xs')]: {
             fontSize: '1rem',
-            fontWeight: 500,
+            fontWeight: 500
         }
     },
     source: {
