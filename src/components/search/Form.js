@@ -124,26 +124,36 @@ const Form = (props) => {
 
     useEffect(() => {
         const queryParams = queryString.parse(props.queryString);
-        const searchTerm = queryParams.q || '';
+        let searchTerm = queryParams.q || '';
         const newFormFields = {
-            hasWords: '', exactPhrase: '', excludeWords: ''
+            hasWords: '', exactPhrase: '', excludeWords: '', website: queryParams.domains || ''
         };
 
-        searchTerm.split().forEach(term => {
+        // Get phrase inside ""
+        const phraseMatch = searchTerm.match(/"([^"]+)"/);
+        if (phraseMatch && phraseMatch.length) {
+            newFormFields.exactPhrase = phraseMatch[0].substr(1, phraseMatch[0].length - 2);
+            
+            // Update searchTerm to remove the match
+            searchTerm = searchTerm.replace(/"([^"]+)"/, '');
+        }
+
+        searchTerm.split(' ').forEach(term => {
             term = term.trim();
 
             switch (term[0]) {
                 case '~':
                     newFormFields.excludeWords = `${newFormFields.excludeWords}${term.substr(1)} `;
                     break;
-                case '+':
-                    newFormFields.exactPhrase = `${newFormFields.exactPhrase}${term.substr(1)} `
-                    break;
                 default:
                     newFormFields.hasWords = `${newFormFields.hasWords}${term} `;
                     break;
             }
         });
+
+        newFormFields.hasWords = newFormFields.hasWords.trim();
+        newFormFields.excludeWords = newFormFields.excludeWords.trim();
+        newFormFields.exactPhrase = newFormFields.exactPhrase.trim();
 
         setFormFields(newFormFields);
     }, [props.queryString]);

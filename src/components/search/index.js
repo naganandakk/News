@@ -83,14 +83,14 @@ const Search = (props) => {
     const classes = useStyles();
     const [value, setValue] = useState('');
     const [showClearSearchIcon, setShowClearSearchIcon] = useState(false);
-    const queryParams = queryString.parse(props.location.search);
-    const searchTerm = queryParams.q || '';
 
     const submitSearch = (qString) => {
         if (qString) {
             window.location = `#/search?${qString}`;
         } else if (value.trim()) {
-            window.location = `#/search?q=${value.trim()}`;
+            const term = value.replace(/{website:([^}]+)}/, '');
+
+            window.location = `#/search?q=${term.trim()}`;
         }
     }
 
@@ -112,7 +112,7 @@ const Search = (props) => {
     const renderDesktopSearchBox = () => {
         return (
             <div ref={searchBoxRef} className={classes.search}>
-                <IconButton onClick={submitSearch} className={classes.searchIcon}>
+                <IconButton onClick={() => submitSearch()} className={classes.searchIcon}>
                     <SearchIcon />
                 </IconButton>
                 {
@@ -157,8 +157,22 @@ const Search = (props) => {
     }, [value]);
 
     useEffect(() => {
+        const queryParams = queryString.parse(props.location.search);
+        console.log(queryParams);
+        let searchTerm = queryParams.q || '';
+        const website = queryParams.domains;
+        const language = queryParams.language;
+
+        if (website && website.trim()) {
+            searchTerm += ` {website:${website.trim()}}`;
+        }
+
+        if (language && language.trim()) {
+            searchTerm += ` {language:${language.trim()}}`;
+        }
+
         setValue(searchTerm);
-    }, [searchTerm])
+    }, [props.location.search])
 
     return (
         <React.Fragment>
