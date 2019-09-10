@@ -2,27 +2,23 @@ import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import queryString from 'query-string';
 
 const useStyles = makeStyles(theme => ({
-    formControl: {
-        display: 'flex',
-    },
-    formControlLabel: {
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2)
-    },
     formContainer: {
-        padding: theme.spacing(1)
+        padding: theme.spacing(2),
+        width: 600
     },
     formActions: {
+        textAlign: 'right'
     },
     formBtn: {
         textTransform: 'none'
+    },
+    formLabel: {
+        fontSize: '0.8rem'
     }
 }));
 
@@ -59,24 +55,17 @@ const Form = (props) => {
         return (
             formFieldList.map(field => {
                 return (
-                    <FormControl component="fieldset" className={classes.formControl}>
-                        <FormControlLabel
-                            className={classes.formControlLabel}
-                            control={
-                                <TextField
-                                    id={`search-form-${field.key}`}
-                                    className={classes.textField}
-                                    value={formFields[field.key]}
-                                    fullWidth
-                                    onChange={handleChange(field.key)}
-                                    margin="normal"
-                                    inputProps={{ 'aria-label': field.label }}
-                                />
-                            }
-                            label={field.label}
-                            labelPlacement="start"
-                        />
-                    </FormControl>
+                    <TextField
+                        key={field.key}
+                        id={`search-form-${field.key}`}
+                        className={classes.textField}
+                        value={formFields[field.key]}
+                        fullWidth
+                        label={field.label}
+                        onChange={handleChange(field.key)}
+                        margin="normal"
+                        inputProps={{ 'aria-label': field.label }}
+                    />
                 )
             })
         )
@@ -162,7 +151,7 @@ const Form = (props) => {
     return (
         <div className={classes.formContainer}>
             <div className={classes.form}>
-                <FormLabel component="legend">Narrow your search results</FormLabel>
+                <FormLabel className={classes.formLabel} component="legend">Narrow your search results</FormLabel>
                 {renderFormFields()}
             </div>
 
