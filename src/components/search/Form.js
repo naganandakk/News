@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 const Form = (props) => {
     const classes = useStyles();
     const [formFields, setFormFields] = useState({
-        exactPhrase: '', hasWords: '', excludeWords: '', website: ''
+        exactPhrase: '', hasWords: '', excludeWords: '', domains: ''
     });
 
     const handleChange = name => event => {
@@ -53,11 +53,10 @@ const Form = (props) => {
             { label: 'Exact phrase', key: 'exactPhrase' },
             { label: 'Has words', key: 'hasWords' },
             { label: 'Exclude words', key: 'excludeWords' },
-            { label: 'Website', key: 'website' }
+            { label: 'Website', key: 'domains' }
         ];
 
         return (
-
             formFieldList.map(field => {
                 return (
                     <FormControl component="fieldset" className={classes.formControl}>
@@ -111,8 +110,8 @@ const Form = (props) => {
         }
 
         // Website
-        if (formFields.website && formFields.website.trim()) {
-            queryParams.domains = formFields.website.trim();
+        if (formFields.domains && formFields.domains.trim()) {
+            queryParams.domains = formFields.domains.trim();
         }
 
         return queryString.stringify(queryParams);
@@ -126,7 +125,7 @@ const Form = (props) => {
         const queryParams = queryString.parse(props.queryString);
         let searchTerm = queryParams.q || '';
         const newFormFields = {
-            hasWords: '', exactPhrase: '', excludeWords: '', website: queryParams.domains || ''
+            hasWords: '', exactPhrase: '', excludeWords: '', domains: queryParams.domains || ''
         };
 
         // Get phrase inside ""

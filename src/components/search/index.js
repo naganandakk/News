@@ -88,7 +88,7 @@ const Search = (props) => {
         if (qString) {
             window.location = `#/search?${qString}`;
         } else if (value.trim()) {
-            const term = value.replace(/{website:([^}]+)}/, '');
+            const term = value.replace(/{domains:([^}]+)}/, '');
 
             window.location = `#/search?q=${term.trim()}`;
         }
@@ -158,13 +158,12 @@ const Search = (props) => {
 
     useEffect(() => {
         const queryParams = queryString.parse(props.location.search);
-        console.log(queryParams);
         let searchTerm = queryParams.q || '';
-        const website = queryParams.domains;
+        const domains = queryParams.domains;
         const language = queryParams.language;
 
-        if (website && website.trim()) {
-            searchTerm += ` {website:${website.trim()}}`;
+        if (domains && domains.trim()) {
+            searchTerm += ` {domains:${domains.trim()}}`;
         }
 
         if (language && language.trim()) {

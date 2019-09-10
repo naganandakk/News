@@ -8,6 +8,7 @@ export default function Modal(props) {
             aria-describedby={props.description || "app-modal-description"}
             open={props.open}
             onClose={props.handleClose || null }
+            onBackdropClick={props.onBackdropClick || null}
         >
             {props.children}
         </MatModal>

@@ -35,7 +35,7 @@ export default function Topics(props) {
         'business': ['Latest', 'Economy', 'Markets', 'Jobs', 'Personal finance', 'Entrepreneurship'],
         'technology': ['Latest', 'Mobile', 'Gadgets', 'Internet', 'Virtual Reality', 'Artificial Intelligence', 'Computing'],
         'entertainment': ['Latest', 'Movies', 'Music', 'Tv', 'Books', 'Art', 'Celebrities'],
-        'sports': ['Latest', 'Cricket', 'Hockey', 'Tennis', 'Football', 'Badminton', 'Kabbadi', 'Women\'s Cricket', 'Basketball', 'F1 Racing'],
+        'sports': ['Latest', 'Cricket', 'Hockey', 'Tennis', 'Football', 'Badminton', 'Kabaddi', 'Women\'s Cricket', 'Basketball', 'F1 Racing'],
         'science': ['Latest', 'Environment', 'Outer space', 'Physics', 'Genetics', 'Wildlife'],
         'health': ['Latest', 'Medicine', 'Healthcare', 'Mental health', 'Nutrition', 'Fitness']
     };
