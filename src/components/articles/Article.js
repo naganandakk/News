@@ -70,6 +70,13 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('xs')]: {
             display: 'none'
         }
+    },
+    readMore: {
+        fontSize: "0.9rem",
+        padding: theme.spacing(0),
+        margin:theme.spacing(0),
+        marginTop: theme.spacing(1),
+        color: theme.palette.primary.main
     }
 }));
 
@@ -86,6 +93,9 @@ export default function (props) {
                         {article.source.name} - {moment.utc(article.publishedAt).fromNow()}
                     </span>
                     <p className={classes.description}>{article.description}</p>
+                    <p className={classes.readMore}>
+                        <a rel="noopener noreferrer" target="_blank" href={article.url}>Read more</a>
+                    </p>
                 </Grid>
                 <Grid item xs={4} className={classes.mediaContainer}>
                     <div
