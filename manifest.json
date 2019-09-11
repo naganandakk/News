@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "newspaper.png",
-      "type": "image/ong",
+      "src": "newspaper192.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "newspaper.png",
+      "src": "newspaper512.png",
       "type": "image/png",
       "sizes": "512x512"
     }	    
