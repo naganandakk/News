@@ -38,13 +38,16 @@ const useStyles = makeStyles(theme => ({
         }
     },
     media: {
-        width: '100%',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
         height: '100%',
+        width: '100%',
         borderRadius: theme.spacing(1),
-        [theme.breakpoints.down('xs')]: {
-            maxHeight: 80,
+        [theme.breakpoints.only('xs')]: {
+            maxHeight: 80
         },
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.only('sm')]: {
             maxHeight: 150
         }
     },
@@ -85,7 +88,12 @@ export default function (props) {
                     <p className={classes.description}>{article.description}</p>
                 </Grid>
                 <Grid item xs={4} className={classes.mediaContainer}>
-                    <img className={classes.media} src={article.urlToImage} alt="" />
+                    <div
+                        className={classes.media}
+                        style={{
+                            backgroundImage: `url(${article.urlToImage})`
+                        }}
+                    />
                 </Grid>
             </Grid>
         </Card>
