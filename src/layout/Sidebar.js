@@ -66,6 +66,9 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: theme.spacing(2),
         fontWeight: 600
     },
+    poweredBy: {
+        color: "#3f51b5"
+    }
 }));
 
 const Sidebar = (props) => {
@@ -109,7 +112,7 @@ const Sidebar = (props) => {
         return(
             <List>
                 <ListItem>
-                <p>Powered by <a rel="noopener noreferrer" target="_blank" href="https://newsapi.org">NewsAPI.org</a></p>
+                    <p className={classes.poweredBy}>Powered by <a rel="noopener noreferrer" target="_blank" href="https://newsapi.org">NewsAPI.org</a></p>
                 </ListItem>
             </List>
         )
