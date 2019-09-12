@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import queryString from 'query-string';
@@ -16,15 +18,20 @@ const useStyles = makeStyles(theme => ({
     formBtn: {
         textTransform: 'none'
     },
+    formControlLabel: {
+        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2)
+    },
     formLabel: {
-        fontSize: '0.8rem'
+        fontSize: '0.8rem',
+        marginRight: theme.spacing(3),
     }
 }));
 
 const Form = (props) => {
     const classes = useStyles();
     const [formFields, setFormFields] = useState({
-        exactPhrase: '', hasWords: '', excludeWords: '', domains: ''
+        exactPhrase: '', hasWords: '', domains: ''
     });
 
     const handleChange = name => event => {
@@ -47,25 +54,35 @@ const Form = (props) => {
         const formFieldList = [
             { label: 'Exact phrase', key: 'exactPhrase' },
             { label: 'Has words', key: 'hasWords' },
-            { label: 'Exclude words', key: 'excludeWords' },
             { label: 'Website', key: 'domains' }
         ];
 
-        return (
-            formFieldList.map(field => {
-                return (
-                    <TextField
-                        key={field.key}
-                        id={`search-form-${field.key}`}
-                        value={formFields[field.key]}
-                        fullWidth
-                        label={field.label}
-                        onChange={handleChange(field.key)}
-                        margin="normal"
-                        inputProps={{ 'aria-label': field.label }}
-                    />
-                )
-            })
+        const formGroupFields = formFieldList.map(field => {
+            return (
+                <FormControlLabel
+                    className={classes.formControlLabel}
+                    key={field.key}
+                    control={
+                        <TextField
+                            id={`search-form-${field.key}`}
+                            value={formFields[field.key]}
+                            onChange={handleChange(field.key)}
+                            margin="normal"
+                        />
+                    }
+                    classes={{
+                        label: classes.formLabel
+                    }}
+                    label={field.label}
+                    labelPlacement="start"
+                />
+            )
+        });
+
+        return(
+            <FormGroup>
+                {formGroupFields}
+            </FormGroup>
         )
     }
 
@@ -88,14 +105,6 @@ const Form = (props) => {
             queryParams.q = `${queryParams.q} "${formFields.exactPhrase.trim()}"`
         }
 
-        // Exclude words prepend each word by ~
-        if (formFields.excludeWords && formFields.excludeWords.trim()) {
-            const wordsToExclude = formFields.excludeWords.trim().split();
-            const wordsNegated = wordsToExclude.map(word => "~" + word);
-
-            queryParams.q = `${queryParams.q} ${wordsNegated.join(' ')}`;
-        }
-
         // Website
         if (formFields.domains && formFields.domains.trim()) {
             queryParams.domains = formFields.domains.trim();
@@ -112,7 +121,7 @@ const Form = (props) => {
         const queryParams = queryString.parse(props.queryString);
         let searchTerm = queryParams.q || '';
         const newFormFields = {
-            hasWords: '', exactPhrase: '', excludeWords: '', domains: queryParams.domains || ''
+            hasWords: '', exactPhrase: '', domains: queryParams.domains || ''
         };
 
         // Get phrase inside ""
@@ -126,19 +135,10 @@ const Form = (props) => {
 
         searchTerm.split(' ').forEach(term => {
             term = term.trim();
-
-            switch (term[0]) {
-                case '~':
-                    newFormFields.excludeWords = `${newFormFields.excludeWords}${term.substr(1)} `;
-                    break;
-                default:
-                    newFormFields.hasWords = `${newFormFields.hasWords}${term} `;
-                    break;
-            }
+            newFormFields.hasWords = `${newFormFields.hasWords}${term} `;
         });
 
         newFormFields.hasWords = newFormFields.hasWords.trim();
-        newFormFields.excludeWords = newFormFields.excludeWords.trim();
         newFormFields.exactPhrase = newFormFields.exactPhrase.trim();
 
         setFormFields(newFormFields);
