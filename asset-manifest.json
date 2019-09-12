@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/google-news-clone/static/css/main.9e12398c.chunk.css",
+    "main.css": "/google-news-clone/static/css/main.79285ca7.chunk.css",
     "main.js": "/google-news-clone/static/js/main.77f0eaf9.chunk.js",
     "main.js.map": "/google-news-clone/static/js/main.77f0eaf9.chunk.js.map",
     "runtime~main.js": "/google-news-clone/static/js/runtime~main.036e5cc2.js",
@@ -8,8 +8,8 @@
     "static/js/2.cc872ddf.chunk.js": "/google-news-clone/static/js/2.cc872ddf.chunk.js",
     "static/js/2.cc872ddf.chunk.js.map": "/google-news-clone/static/js/2.cc872ddf.chunk.js.map",
     "index.html": "/google-news-clone/index.html",
-    "precache-manifest.60cf9095d07cde80f86dbbb378249be6.js": "/google-news-clone/precache-manifest.60cf9095d07cde80f86dbbb378249be6.js",
+    "precache-manifest.b00cde0ebd39c480d1c5aefc717cd111.js": "/google-news-clone/precache-manifest.b00cde0ebd39c480d1c5aefc717cd111.js",
     "service-worker.js": "/google-news-clone/service-worker.js",
-    "static/css/main.9e12398c.chunk.css.map": "/google-news-clone/static/css/main.9e12398c.chunk.css.map"
+    "static/css/main.79285ca7.chunk.css.map": "/google-news-clone/static/css/main.79285ca7.chunk.css.map"
   }
 }
