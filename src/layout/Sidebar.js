@@ -105,6 +105,16 @@ const Sidebar = (props) => {
         ]
     ];
 
+    const renderPoweredBy = () => {
+        return(
+            <List>
+                <ListItem>
+                <p>Powered by <a rel="noopener noreferrer" target="_blank" href="https://newsapi.org">NewsAPI.org</a></p>
+                </ListItem>
+            </List>
+        )
+    }
+
     const renderMenuList = () => {
         const menuListLength = menuList.length;
 
@@ -152,6 +162,8 @@ const Sidebar = (props) => {
                     </h3>
                 </div>
                 {renderMenuList()}
+                <Divider />
+                {renderPoweredBy()}
             </Drawer>
         );
     };
@@ -170,6 +182,8 @@ const Sidebar = (props) => {
             >
                 <div className={classes.toolbar} />
                 {renderMenuList()}
+                <Divider />
+                {renderPoweredBy()}
             </Drawer>
         );
     };

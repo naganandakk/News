@@ -8,8 +8,7 @@ import queryString from 'query-string';
 
 const useStyles = makeStyles(theme => ({
     formContainer: {
-        padding: theme.spacing(2),
-        width: 600
+        padding: theme.spacing(2)
     },
     formActions: {
         textAlign: 'right'
@@ -58,7 +57,6 @@ const Form = (props) => {
                     <TextField
                         key={field.key}
                         id={`search-form-${field.key}`}
-                        className={classes.textField}
                         value={formFields[field.key]}
                         fullWidth
                         label={field.label}

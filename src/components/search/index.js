@@ -72,10 +72,8 @@ const useStyles = makeStyles(theme => ({
     inputInput: {
         padding: theme.spacing(1, 4, 1, 1),
         transition: theme.transitions.create('width'),
-        width: theme.spacing(75),
         height: theme.spacing(4),
         [theme.breakpoints.down('md')]: {
-            width: theme.spacing(30),
             padding: theme.spacing(1, 10, 1, 7)
         }
     },
