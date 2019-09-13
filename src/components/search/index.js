@@ -7,6 +7,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CloseIcon from '@material-ui/icons/Close';
 import Hidden from '@material-ui/core/Hidden';
 import queryString from 'query-string';
@@ -15,6 +16,16 @@ import Form from './Form';
 
 const useStyles = makeStyles(theme => ({
     search: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.15),
+        '&:hover': {
+            backgroundColor: fade(theme.palette.common.white, 0.25),
+        },
+        marginLeft: 0,
+        width: '100%'
+    },
+    searchMobile: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
         backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -33,8 +44,16 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         color: "#FFFFFF"
     },
+    arrowBackIcon: {
+        width: theme.spacing(4),
+        height: '100%',
+        position: 'absolute',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: "#FFFFFF"
+    },
     searchIconMobile: {
-        width: theme.spacing(7),
         height: '100%',
         right: theme.spacing(2),
         position: 'relative',
@@ -50,7 +69,10 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         right: theme.spacing(6),
-        color: "#FFFFFF"
+        color: "#FFFFFF",
+        [theme.breakpoints.only('xs')]: {
+            right: theme.spacing(1)
+        },
     },
     inputRoot: {
         color: 'inherit',
@@ -66,6 +88,16 @@ const useStyles = makeStyles(theme => ({
     },
     inputInput: {
         padding: theme.spacing(1, 4, 1, 1),
+        transition: theme.transitions.create('width'),
+        height: theme.spacing(4)
+    },
+    inputRootMobile: {
+        color: 'inherit',
+        width: 'auto',
+        marginLeft: theme.spacing(5)
+    },
+    inputInputMobile: {
+        padding: theme.spacing(1, 6, 1, 1),
         transition: theme.transitions.create('width'),
         height: theme.spacing(4)
     },
@@ -85,11 +117,13 @@ const Search = (props) => {
     const classes = useStyles();
     const [value, setValue] = useState('');
     const [showClearSearchIcon, setShowClearSearchIcon] = useState(false);
+    const [showMobileSearchInput, setShowMobileSearchInput] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
 
     const submitSearch = (qString) => {
         setAnchorEl(null);
-
+        props.onMobileSearchBoxToggle(false);
+        setShowMobileSearchInput(false);
         if (qString) {
             window.location = `#/search?${qString}`;
         } else if (value.trim()) {
@@ -110,10 +144,24 @@ const Search = (props) => {
 
     const handleOnChange = (event) => setValue(event.target.value)
 
-    const renderSearchIcon = (className) => {
+    const renderSearchIcon = (className, onClickHandler) => {
         return (
-            <IconButton onClick={() => submitSearch()} className={className}>
+            <IconButton onClick={() => onClickHandler()} className={className}>
                 <SearchIcon />
+            </IconButton>
+        )
+    }
+
+    const renderArrowLeftIcon = () => {
+        return(
+            <IconButton
+                className={classes.arrowBackIcon}
+                onClick={() => {
+                    setShowMobileSearchInput(false)
+                    props.onMobileSearchBoxToggle(false)
+                }}
+            >
+                <ArrowBackIcon />
             </IconButton>
         )
     }
@@ -171,7 +219,7 @@ const Search = (props) => {
         )
     }
 
-    const renderSearchInput = () => {
+    const renderDesktopSearchInput = () => {
         return (
             <InputBase
                 onChange={handleOnChange}
@@ -187,13 +235,33 @@ const Search = (props) => {
         )
     }
 
+    const renderMobileSearchInput = (show) => {
+        if (!show) {
+            return null;
+        }
+
+        return (
+            <InputBase
+                onChange={handleOnChange}
+                onKeyPress={handleKeyPress}
+                value={value}
+                placeholder="Search"
+                classes={{
+                    root: classes.inputRootMobile,
+                    input: classes.inputInputMobile,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+            />
+        )
+    }
+
     const renderDesktopSearchBox = () => {
         return (
             <div ref={searchBoxRef} className={classes.search}>
-                {renderSearchIcon(classes.searchIcon)}
+                {renderSearchIcon(classes.searchIcon, () => { submitSearch() })}
                 {renderClearSearchIcon()}
                 {renderSearchFormToggler()}
-                {renderSearchInput()}
+                {renderDesktopSearchInput()}
                 {renderSearchFormMenu()}
             </div>
         )
@@ -202,7 +270,23 @@ const Search = (props) => {
     const renderMobileSearchBox = () => {
         return (
             <React.Fragment>
-                {renderSearchIcon(classes.searchIconMobile)}
+                {
+                    showMobileSearchInput
+                    ?   <div className={classes.searchMobile}>
+                            {renderArrowLeftIcon()}
+                            {renderClearSearchIcon()}
+                            {renderMobileSearchInput(showMobileSearchInput)}
+                        </div>
+                    :   null
+                }
+                {
+                    !showMobileSearchInput
+                    ?   renderSearchIcon(classes.searchIconMobile, () => {
+                        setShowMobileSearchInput(true);
+                        props.onMobileSearchBoxToggle(true);
+                    })
+                    :   null
+                }
             </React.Fragment>
         )
     }
