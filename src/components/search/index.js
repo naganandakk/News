@@ -173,7 +173,12 @@ const Search = (props) => {
         }
 
         return (
-            <IconButton onClick={clearSearch} className={classes.closeIcon}>
+            <IconButton
+                onClick={() => {
+                    clearSearch();
+                    props.onMobileSearchBoxToggle(false);
+                    setShowMobileSearchInput(false);
+                }} className={classes.closeIcon}>
                 <CloseIcon />
             </IconButton>
         );
@@ -243,6 +248,7 @@ const Search = (props) => {
 
         return (
             <InputBase
+                autoFocus
                 onChange={handleOnChange}
                 onKeyPress={handleKeyPress}
                 value={value}
