@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     },
     toolbar: theme.mixins.toolbar,
     listItem: {
+        color: "#3c4043",
         borderTopRightRadius: theme.spacing(3),
         borderBottomRightRadius: theme.spacing(3),
         '&:hover': {
