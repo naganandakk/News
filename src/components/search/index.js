@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
         color: "#FFFFFF"
     },
     arrowBackIcon: {
-        width: theme.spacing(4),
+        width: theme.spacing(6),
         height: '100%',
         position: 'absolute',
         display: 'flex',
@@ -94,7 +94,8 @@ const useStyles = makeStyles(theme => ({
     inputRootMobile: {
         color: 'inherit',
         width: 'auto',
-        marginLeft: theme.spacing(5)
+        marginLeft: theme.spacing(5),
+        marginRight: theme.spacing(5)
     },
     inputInputMobile: {
         padding: theme.spacing(1, 6, 1, 1),
