@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/google-news-clone/static/css/main.87d4574a.chunk.css",
-    "main.js": "/google-news-clone/static/js/main.8d664527.chunk.js",
-    "main.js.map": "/google-news-clone/static/js/main.8d664527.chunk.js.map",
+    "main.css": "/google-news-clone/static/css/main.a29e5bd6.chunk.css",
+    "main.js": "/google-news-clone/static/js/main.633b0b6f.chunk.js",
+    "main.js.map": "/google-news-clone/static/js/main.633b0b6f.chunk.js.map",
     "runtime~main.js": "/google-news-clone/static/js/runtime~main.036e5cc2.js",
     "runtime~main.js.map": "/google-news-clone/static/js/runtime~main.036e5cc2.js.map",
-    "static/js/2.c8a93c57.chunk.js": "/google-news-clone/static/js/2.c8a93c57.chunk.js",
-    "static/js/2.c8a93c57.chunk.js.map": "/google-news-clone/static/js/2.c8a93c57.chunk.js.map",
+    "static/js/2.a99ec2eb.chunk.js": "/google-news-clone/static/js/2.a99ec2eb.chunk.js",
+    "static/js/2.a99ec2eb.chunk.js.map": "/google-news-clone/static/js/2.a99ec2eb.chunk.js.map",
     "index.html": "/google-news-clone/index.html",
-    "precache-manifest.6bdd9c7c8845a1de826b7a78c91db6ed.js": "/google-news-clone/precache-manifest.6bdd9c7c8845a1de826b7a78c91db6ed.js",
+    "precache-manifest.efd534969e77735947cf3ccccf3b11b5.js": "/google-news-clone/precache-manifest.efd534969e77735947cf3ccccf3b11b5.js",
     "service-worker.js": "/google-news-clone/service-worker.js",
-    "static/css/main.87d4574a.chunk.css.map": "/google-news-clone/static/css/main.87d4574a.chunk.css.map"
+    "static/css/main.a29e5bd6.chunk.css.map": "/google-news-clone/static/css/main.a29e5bd6.chunk.css.map"
   }
 }
