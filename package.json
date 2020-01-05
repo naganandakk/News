@@ -1,6 +1,6 @@
 {
-  "homepage": "https://naganandakk.github.io/google-news-clone",
-  "name": "google-news-clone",
+  "homepage": "https://naganandakk.github.io/daily-news",
+  "name": "daily-news",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
