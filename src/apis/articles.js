@@ -13,12 +13,10 @@ client.interceptors.request.use((request) => {
     const apiKeyIndex = Math.floor((Math.random() * apiKeys.length));
     const apiKey = apiKeys[apiKeyIndex];
 
-    // Auth token
-    request.headers.Authorization = `Bearer ${apiKey}`;
-
     // Default query parameters
     const defaultQueryParams = {
-        country: "in"
+        country: "in",
+        apiKey: apiKey
     };
 
     // Add pageSize in the end
