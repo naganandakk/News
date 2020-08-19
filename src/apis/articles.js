@@ -6,7 +6,7 @@ const apiKeys = [
 ]
 
 const client = axios.create({
-    baseURL: "https://newsapi.org/v2"
+    baseURL: "https://daily-news-proxy.herokuapp.com/v2"
 })
 
 client.interceptors.request.use((request) => {
